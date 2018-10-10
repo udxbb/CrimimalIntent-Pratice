@@ -1,5 +1,6 @@
 package com.bb.android.criminalintent.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.android.criminalintent.R;
+import com.bb.android.criminalintent.activity.CrimeActivity;
 import com.bb.android.criminalintent.model.Crime;
 import com.bb.android.criminalintent.model.CrimeLab;
 
+import java.text.DateFormat;
 import java.util.List;
 
 public class CrimeListFragment extends Fragment {
@@ -56,13 +59,18 @@ public class CrimeListFragment extends Fragment {
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+            //mDateTextView.setText(mCrime.getDate().toString());
+            java.text.DateFormat mDateFormat = java.text.DateFormat.getDateInstance(DateFormat.FULL);
+            mDateTextView.setText(mDateFormat.format(mCrime.getDate()));
             mSolvedImageView.setVisibility(crime.getSolved() ? View.VISIBLE : View.GONE);
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), mCrime.getTitle() + "clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), mCrime.getTitle() + "clicked", Toast.LENGTH_SHORT).show();
+            //Intent intent = new Intent(getActivity(), CrimeActivity.class);
+            Intent intent = CrimeActivity.newIntent(getContext(), mCrime.getId());
+            startActivity(intent);
         }
     }
 
@@ -94,11 +102,22 @@ public class CrimeListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
-        mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecycleView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecycleView.setAdapter(mAdapter);
+        }
+        else {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }
