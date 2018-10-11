@@ -16,7 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
-import com.bb.android.criminalintent.activity.CrimeActivity;
+
 import com.bb.android.criminalintent.model.Crime;
 import com.bb.android.criminalintent.R;
 import com.bb.android.criminalintent.model.CrimeLab;
@@ -91,7 +91,9 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+
         return v;
+
     }
 
 }

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bb.android.criminalintent.R;
-import com.bb.android.criminalintent.activity.CrimeActivity;
+import com.bb.android.criminalintent.activity.CrimePagerActivity;
 import com.bb.android.criminalintent.model.Crime;
 import com.bb.android.criminalintent.model.CrimeLab;
 
@@ -70,7 +70,7 @@ public class CrimeListFragment extends Fragment {
         public void onClick(View view) {
             //Toast.makeText(getContext(), mCrime.getTitle() + "clicked", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(getActivity(), CrimeActivity.class);
-            Intent intent = CrimeActivity.newIntent(getContext(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getContext(), mCrime.getId());
             itemPosition = getAdapterPosition();
             startActivity(intent);
         }
