@@ -26,6 +26,7 @@ public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecycleView;
     private CrimeAdapter mAdapter;
+    private int itemPosition;
 
     @Nullable
     @Override
@@ -70,6 +71,7 @@ public class CrimeListFragment extends Fragment {
             //Toast.makeText(getContext(), mCrime.getTitle() + "clicked", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(getActivity(), CrimeActivity.class);
             Intent intent = CrimeActivity.newIntent(getContext(), mCrime.getId());
+            itemPosition = getAdapterPosition();
             startActivity(intent);
         }
     }
@@ -117,7 +119,7 @@ public class CrimeListFragment extends Fragment {
             mCrimeRecycleView.setAdapter(mAdapter);
         }
         else {
-            mAdapter.notifyDataSetChanged();
+            mAdapter.notifyItemChanged(itemPosition);
         }
     }
 }
