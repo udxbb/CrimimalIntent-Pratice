@@ -5,4 +5,9 @@
     android:id="@+id/dialog_date_picker"
     android:calendarViewShown="false" >
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/OK_Btn" />
+
 </DatePicker>

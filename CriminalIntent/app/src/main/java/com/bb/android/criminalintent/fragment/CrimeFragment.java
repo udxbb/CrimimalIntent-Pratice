@@ -21,10 +21,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 
+import com.bb.android.criminalintent.activity.DateActivity;
 import com.bb.android.criminalintent.model.Crime;
 import com.bb.android.criminalintent.R;
 import com.bb.android.criminalintent.model.CrimeLab;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -33,14 +35,17 @@ public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
 
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
+    private Button mTimeButton;
     private CheckBox mSolvedCheckBox;
 
     //set request code
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1001;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         //create a new bundle
@@ -93,11 +98,25 @@ public class CrimeFragment extends Fragment {
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getFragmentManager();
+                Intent intent = new Intent(getActivity(), DateActivity.class);
+                startActivityForResult(intent, REQUEST_DATE);
+                //FragmentManager fragmentManager = getFragmentManager();
                 //DatePickerFragment dialog = new DatePickerFragment();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
-                dialog.show(fragmentManager, DIALOG_DATE);
+                //DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
+                //dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                //dialog.show(fragmentManager, DIALOG_DATE);
+            }
+        });
+
+        mTimeButton = (Button) v.findViewById(R.id.crime_time_btn);
+        updateDate();
+        mTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                TimePickerFragment dialog = TimePickerFragment.newInstance(mCrime.getDate());
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
+                dialog.show(fragmentManager, DIALOG_TIME);
             }
         });
 
@@ -124,6 +143,15 @@ public class CrimeFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+        }
+
+        if (requestCode == REQUEST_TIME) {
+            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+            mTimeButton.setText(hour + " : " + minute);
         }
     }
 
