@@ -11,4 +11,13 @@
     <string name="ic_solved">Case solved</string>
     <string name="jump_to_first">Jump to First</string>
     <string name="jump_to_last">Jump to Last</string>
+
+    <string name="new_crime">New Crime</string>
+    <string name="delete_crime">Delete Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <plurals name="subtitle_plural">
+        <item quantity="one">%1$d crime</item>
+        <item quantity="other">%1$d crimes</item>
+    </plurals>
 </resources>
