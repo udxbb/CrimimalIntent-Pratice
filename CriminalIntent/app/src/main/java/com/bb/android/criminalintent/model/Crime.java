@@ -12,9 +12,14 @@ public class Crime {
 
     public Crime() {
         //产生唯一ID
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id) {
+        mId = id;
         mDate = new Date();
     }
+
     //alt + insert
     public UUID getId() {
         return mId;

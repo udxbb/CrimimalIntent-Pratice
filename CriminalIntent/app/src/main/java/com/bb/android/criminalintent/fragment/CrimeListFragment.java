@@ -121,6 +121,10 @@ public class CrimeListFragment extends Fragment {
         public int getItemCount() {
             return mCrimes.size();
         }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
+        }
     }
 
     @Override
@@ -179,6 +183,7 @@ public class CrimeListFragment extends Fragment {
         else {
             //mAdapter.notifyItemChanged(itemPosition);
             mCrimeRecycleView.getRecycledViewPool().clear();
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
@@ -196,6 +201,5 @@ public class CrimeListFragment extends Fragment {
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setSubtitle(subtitle);
-
     }
 }
