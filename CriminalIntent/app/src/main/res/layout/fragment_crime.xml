@@ -47,6 +47,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/crime_telephone"
+        android:text="@string/crime_telephone_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 
 
 

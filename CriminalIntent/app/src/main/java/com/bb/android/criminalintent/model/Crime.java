@@ -10,6 +10,7 @@ public class Crime {
     private Date mDate;
     private Boolean mSolved = false;
     private String mSuspect;
+    private String mTelephone;
 
     public Crime() {
         //产生唯一ID
@@ -56,5 +57,13 @@ public class Crime {
 
     public void setSuspect(String suspect) {
         mSuspect = suspect;
+    }
+
+    public String getTelephone() {
+        return mTelephone;
+    }
+
+    public void setTelephone(String telephone) {
+        mTelephone = telephone;
     }
 }
