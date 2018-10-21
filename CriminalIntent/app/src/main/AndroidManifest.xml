@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.hardware.camera" android:required="false"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,15 @@
             android:name=".activity.CrimePagerActivity"
             android:parentActivityName=".activity.CrimeListActivity">
         </activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bb.android.criminalintent.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files" />
+        </provider>
     </application>
 
 </manifest>
