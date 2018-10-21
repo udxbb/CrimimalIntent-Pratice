@@ -1,3 +1,3 @@
 # CrimimalIntent-Pratice
-安卓编程权威指南练习
+Android Programming The Big Nerd Ranch Guide. Third Edition.
 This an individual exercise.
