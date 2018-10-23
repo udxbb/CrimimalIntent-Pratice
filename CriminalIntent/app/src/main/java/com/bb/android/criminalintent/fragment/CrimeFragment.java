@@ -348,7 +348,11 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(mCrime.getDate().toString());
+        java.text.DateFormat dateFormat = DateFormat.getLongDateFormat(getContext());
+        String date = dateFormat.format(mCrime.getDate());
+        //String dateformat1 = "yyyy.MM.dd";
+        //String date = DateFormat.format(dateformat1, mCrime.getDate()).toString();
+        mDateButton.setText(date);
     }
 
     @Override
@@ -386,12 +390,14 @@ public class CrimeFragment extends Fragment {
     private void updatePhotoView(int width, int height) {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageDrawable(null);
+            mPhotoView.setContentDescription(getString(R.string.image_of_crime));
         }
         else {
             //Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
             //mPhotoView.setImageBitmap(bitmap);
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), width, height);
             mPhotoView.setImageBitmap(bitmap);
+            mPhotoView.setContentDescription(getString(R.string.image_of_crime2));
         }
     }
 

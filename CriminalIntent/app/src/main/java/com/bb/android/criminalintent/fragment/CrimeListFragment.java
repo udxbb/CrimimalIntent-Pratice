@@ -103,6 +103,12 @@ public class CrimeListFragment extends Fragment {
             java.text.DateFormat mDateFormat = java.text.DateFormat.getDateInstance(DateFormat.FULL);
             mDateTextView.setText(mDateFormat.format(mCrime.getDate()));
             mSolvedImageView.setVisibility(crime.getSolved() ? View.VISIBLE : View.GONE);
+            if (crime.getSolved()) {
+                mSolvedImageView.setContentDescription("crime is solved");
+            }
+            else {
+                mSolvedImageView.setContentDescription("crime is not solved");
+            }
         }
 
         @Override
